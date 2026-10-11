@@ -1,75 +1,63 @@
-# React + TypeScript + Vite
+# Лабораторна робота №2. Завантаження даних з API, обробка станів та сортування
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Варіант 11**: Світова економіка (World Bank API).
 
-Currently, two official plugins are available:
+## Опис проекту
+Продовження розробки аналітичного дашборду з ЛР1. Mock-дані замінено на реальні дані з відкритого API Світового банку (World Bank API).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Ендпоінт:
+`https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD?format=json&per_page=50&date=2022`
 
-## React Compiler
+## Реалізований функціонал
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Завантаження даних через `useEffect`**:
+   - Запит до API виконується при першому монтуванні компонента з використанням `fetch` та `AbortController` для безпечного очищення побічних ефектів.
+   - Отримані дані валідуються та зберігаються у стані за допомогою `useState`.
 
-## Expanding the ESLint configuration
+2. **Обробка та умовний рендеринг трьох станів**:
+   - `loading`: відображення індикатора завантаження (spinner) під час очікування відповіді від API.
+   - `error`: відображення повідомлення про помилку мережі/сервера з можливістю повторної спроби запиту («Спробувати знову»).
+   - `empty`: відображення повідомлення про порожній набір даних.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+3. **Таблиця даних (5 значущих полів)**:
+   - Країна / Регіон (`countryName`)
+   - Код країни (`countryCode`)
+   - Показник (`indicatorName`)
+   - Звітний рік (`year`)
+   - Обсяг ВВП у USD (`value` із форматуванням)
+   - Кожен рядок таблиці має унікальний `key`.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+4. **Сортування (Derived State)**:
+   - Сортування за назвою країни, кодом або за числовим показником ВВП.
+   - Перемикання напрямку (`asc` / `desc`) із візуальними індикаторами (`▲` / `▼`).
+   - Реалізовано через `useMemo` без мутації оригінального масиву даних (`[...data].sort(...)`).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+5. **Живі KPI-картки**:
+   - Перераховуються на основі реальних отриманих даних:
+     - Сумарний ВВП вибірки
+     - Середній ВВП
+     - Кількість записів
+     - Найбільший ВВП (країна-лідер)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+6. **Архітектура (Container / Presentational)**:
+   - **Container** (`DashboardContainer.tsx`): інкапсулює роботу з API, стан запиту, логіку сортування та обчислення похідних KPI.
+   - **Presentational**:
+     - `DataTable.tsx`: чисте представлення таблиці та подій сортування.
+     - `KpiGrid.tsx` / `KpiCard.tsx`: відображення карток KPI.
+     - `StatusMessage.tsx`: відображення станів завантаження, помилки та порожнього списку.
 
-```
+## Запуск проекту
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+```bash
+# Встановлення залежностей (якщо ще не встановлено)
+npm install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+# Запуск локального сервера розробки
+npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Перевірка лінтером
+npm run lint
 
+# Збірка проекту
+npm run build
 ```
