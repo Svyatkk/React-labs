@@ -16,7 +16,6 @@ export function DashboardContainer() {
   const [sortOrder, setSortOrder] = useState<SortOrder>('desc');
   const [reloadToken, setReloadToken] = useState<number>(0);
 
-  // Завантаження даних через useEffect при монтуванні
   useEffect(() => {
     const controller = new AbortController();
 
@@ -34,7 +33,6 @@ export function DashboardContainer() {
         const json = await response.json() as unknown;
         const records = Array.isArray(json) && Array.isArray(json[1]) ? (json[1] as WorldBankRecord[]) : [];
 
-        // Трансформація даних з API у типізований масив
         const parsedItems: EconomicIndicatorItem[] = records
           .filter((item): item is WorldBankRecord & { value: number } => item.value !== null && item.value !== undefined)
           .map((item, index) => ({
@@ -65,7 +63,6 @@ export function DashboardContainer() {
     };
   }, [reloadToken]);
 
-  // Обробник зміни сортування
   const handleSort = (field: SortField) => {
     if (sortField === field) {
       setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
@@ -75,7 +72,6 @@ export function DashboardContainer() {
     }
   };
 
-  // Похідний стан (derived state) для сортованих даних — без мутації оригіналу
   const sortedData = useMemo(() => {
     return [...data].sort((a, b) => {
       const result =
@@ -87,7 +83,6 @@ export function DashboardContainer() {
     });
   }, [data, sortField, sortOrder]);
 
-  // Живі KPI, обчислені на основі реальних даних
   const kpis: KpiItem[] = useMemo(() => {
     if (data.length === 0) return [];
 
@@ -133,20 +128,16 @@ export function DashboardContainer() {
 
   return (
     <div className="dashboard-content">
-      {/* Стан завантаження */}
       {loading && <StatusMessage type="loading" />}
 
-      {/* Стан помилки */}
       {!loading && error && (
         <StatusMessage type="error" message={error} onRetry={handleRetry} />
       )}
 
-      {/* Порожній стан */}
       {!loading && !error && data.length === 0 && (
         <StatusMessage type="empty" message="World Bank API не повернуло даних." />
       )}
 
-      {/* Відображення отриманих даних */}
       {!loading && !error && data.length > 0 && (
         <>
           <section className="section">
