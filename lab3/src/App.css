@@ -1,0 +1,287 @@
+.dashboard-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.dashboard-header {
+  margin-bottom: 24px;
+}
+
+.dashboard-header h1 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+}
+
+.dashboard-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.section h2 {
+  font-size: 18px;
+  margin: 0 0 12px 0;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+/* KPI Cards */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-title {
+  font-size: 13px;
+  color: #666;
+}
+
+.kpi-value {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.kpi-change {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.kpi-change.positive {
+  color: #167a3a;
+}
+
+.kpi-change.negative {
+  color: #b3261e;
+}
+
+/* Table Controls */
+.table-controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.table-meta {
+  font-size: 13px;
+  color: #666;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+}
+
+.data-table th {
+  background-color: #f3f3f3;
+  font-weight: 600;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #fcfcfc;
+}
+
+.data-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.sortable-th {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s;
+}
+
+.sortable-th:hover {
+  background-color: #e9ecef;
+}
+
+.sort-icon {
+  font-size: 11px;
+}
+
+.sort-icon.neutral {
+  color: #999;
+}
+
+.sort-icon.active {
+  color: #1a73e8;
+  font-weight: bold;
+}
+
+.numeric-col {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.badge-code {
+  display: inline-block;
+  padding: 2px 6px;
+  background-color: #eef2ff;
+  color: #3b5998;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+/* Status Messages (Loading, Error, Empty) */
+.status-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+  min-height: 180px;
+}
+
+.status-box.loading {
+  color: #555;
+  gap: 12px;
+}
+
+.status-box.error {
+  background-color: #fff8f8;
+  border-color: #f5c2c7;
+  color: #842029;
+}
+
+.status-box.empty {
+  background-color: #fdfdfe;
+  color: #666;
+}
+
+.status-title {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.status-text {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #1a73e8;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-retry {
+  padding: 6px 14px;
+  font-size: 14px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-retry:hover {
+  background-color: #bb2d3b;
+}
+
+button {
+  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+}
+
+button:hover:not(:disabled) {
+  background-color: #eee;
+}
+
+
+/* Filter Panel (Lab 3) */
+.filter-panel {
+  margin-bottom: 24px;
+}
+
+.filter-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-control {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.15s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+.btn-reset {
+  padding: 6px 14px;
+  font-size: 13px;
+  background-color: #f1f3f4;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-reset:hover {
+  background-color: #e8eaed;
+}
