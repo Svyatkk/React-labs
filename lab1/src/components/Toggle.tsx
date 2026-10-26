@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-interface ToggleProps {
-  label?: string;
-}
+import type { ToggleProps } from '../types';
+
+
 
 export function Toggle({ label = 'Формат показників ВВП' }: ToggleProps) {
   const [isPerCapita, setIsPerCapita] = useState<boolean>(false);

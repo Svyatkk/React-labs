@@ -1,19 +1,14 @@
 import { useState } from 'react';
-import type { CountryItem } from '../types';
-
-interface FilteredListProps {
-  title?: string;
-  items: CountryItem[];
-  categories: string[];
-}
-
-
+import type { FilteredListProps } from '../types';
+import { CountryTableBody } from './CountryTableBody';
 
 export function FilteredList({title = 'Показники країн за регіонами',items,categories,}: FilteredListProps) 
-{const [selectedCategory, setSelectedCategory] = useState<string>(categories[0] ?? 'Усі регіони');
-
+{
+  const [selectedCategory, setSelectedCategory] = useState<string>('Усі регіони');
+    
   const filteredItems = selectedCategory === 'Усі регіони'? items : items.filter((country) => country.region === selectedCategory);
-        
+      
+    
   return (  
     <div className="card filter-section">
       <div className="filter-header">
@@ -45,25 +40,7 @@ export function FilteredList({title = 'Показники країн за рег
               <th>Тривалість життя</th>
             </tr>
           </thead>
-          <tbody>
-            {filteredItems.length > 0 ? (
-              filteredItems.map((country) => (
-                <tr key={country.id}>
-                  <td>{country.name}</td>
-                  <td>{country.region}</td>
-                  <td>{country.gdp}</td>
-                  <td>{country.unemployment}</td>
-                  <td>{country.lifeExpectancy}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={5} className="no-data">
-                  Немає даних для обраного регіону
-                </td>
-              </tr>
-            )}
-          </tbody>
+          <CountryTableBody items={filteredItems} />
         </table>
       </div>
     </div>

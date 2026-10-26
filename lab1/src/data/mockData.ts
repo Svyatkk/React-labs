@@ -2,28 +2,28 @@ import type { KpiItem, CountryItem } from '../types';
 
 export const kpiData: KpiItem[] = [
   {
-    id: 'gdp',
+    id: 1,
     title: 'Сумарний ВВП',
     value: '$105.4 трлн',
     change: '+4.1%',
     isPositive: true,
   },
   {
-    id: 'population',
+    id: 2,
     title: 'Населення світу',
     value: '8.08 млрд',
     change: '+0.9%',
     isPositive: true,
   },
   {
-    id: 'life-expectancy',
+    id: 3,
     title: 'Тривалість життя',
     value: '73.2 роки',
     change: '+0.4%',
     isPositive: true,
   },
   {
-    id: 'unemployment',
+    id: 4,
     title: 'Рівень безробіття',
     value: '5.1%',
     change: '-0.2%',
@@ -39,9 +39,11 @@ export const regions: string[] = [
   'Латинська Америка',
 ];
 
+
+
 export const countriesData: CountryItem[] = [
   {
-    id: 'UKR',
+    id: 1,
     name: 'Україна',
     region: 'Європа та Центральна Азія',
     gdp: '$178 млрд',
@@ -49,7 +51,7 @@ export const countriesData: CountryItem[] = [
     lifeExpectancy: '69.7 р.',
   },
   {
-    id: 'POL',
+    id: 2,
     name: 'Польща',
     region: 'Європа та Центральна Азія',
     gdp: '$842 млрд',
@@ -57,7 +59,7 @@ export const countriesData: CountryItem[] = [
     lifeExpectancy: '78.5 р.',
   },
   {
-    id: 'DEU',
+    id: 3,
     name: 'Німеччина',
     region: 'Європа та Центральна Азія',
     gdp: '$4.45 трлн',
@@ -65,7 +67,7 @@ export const countriesData: CountryItem[] = [
     lifeExpectancy: '80.9 р.',
   },
   {
-    id: 'USA',
+    id: 4,
     name: 'США',
     region: 'Північна Америка',
     gdp: '$27.36 трлн',
@@ -73,7 +75,7 @@ export const countriesData: CountryItem[] = [
     lifeExpectancy: '77.5 р.',
   },
   {
-    id: 'CAN',
+    id: 5,
     name: 'Канада',
     region: 'Північна Америка',
     gdp: '$2.14 трлн',
@@ -81,7 +83,7 @@ export const countriesData: CountryItem[] = [
     lifeExpectancy: '81.3 р.',
   },
   {
-    id: 'JPN',
+    id: 6,
     name: 'Японія',
     region: 'Східна Азія та Океанія',
     gdp: '$4.21 трлн',
@@ -89,7 +91,7 @@ export const countriesData: CountryItem[] = [
     lifeExpectancy: '84.6 р.',
   },
   {
-    id: 'CHN',
+    id: 7,
     name: 'Китай',
     region: 'Східна Азія та Океанія',
     gdp: '$17.79 трлн',
@@ -97,7 +99,7 @@ export const countriesData: CountryItem[] = [
     lifeExpectancy: '78.2 р.',
   },
   {
-    id: 'BRA',
+    id: 8,
     name: 'Бразилія',
     region: 'Латинська Америка',
     gdp: '$2.17 трлн',

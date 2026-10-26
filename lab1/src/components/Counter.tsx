@@ -1,12 +1,6 @@
 import { useState } from 'react';
+import type { CounterProps } from '../types';
 
-interface CounterProps {
-  label?: string;
-  initialValue?: number;
-  step?: number;
-  min?: number;
-  max?: number;
-}
 
 export function Counter({
   label = 'Звітний рік',
@@ -20,7 +14,8 @@ export function Counter({
   const handleIncrement = () => {
     setValue((prev) => (max !== undefined ? Math.min(prev + step, max) : prev + step));
   };
-
+  
+    
   const handleDecrement = () => {
     setValue((prev) => (min !== undefined ? Math.max(prev - step, min) : prev - step));
   };
@@ -37,14 +32,12 @@ export function Counter({
         <button
           type="button"
           onClick={handleDecrement}
-          disabled={min !== undefined && value <= min}
         >
           -
         </button>
         <button
           type="button"
           onClick={handleIncrement}
-          disabled={max !== undefined && value >= max}
         >
           +
         </button>

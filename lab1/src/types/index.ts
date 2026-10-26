@@ -1,5 +1,25 @@
 export interface KpiItem {
-  id: string;
+  id: number;
+  title: string;
+  value: string;
+  change: string;
+  isPositive?: boolean;
+}
+export interface ToggleProps {
+  label?: string;
+}
+
+
+ export interface CounterProps {
+  label?: string;
+  initialValue?: number;
+  step?: number;
+  min?: number;
+  max?: number;
+}
+
+
+export interface KpiCardProps {
   title: string;
   value: string;
   change: string;
@@ -7,12 +27,15 @@ export interface KpiItem {
 }
 
 
-
-
+export interface FilteredListProps {
+  title?: string;
+  items: CountryItem[];
+  categories: string[];
+}
 
 
 export interface CountryItem {
-  id: string;
+  id: number;
   name: string;
   region: string;
   gdp: string;
