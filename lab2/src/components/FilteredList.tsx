@@ -1,69 +1,45 @@
-import { useState } from 'react';
-import type { CountryItem } from '../types';
+import type { FilteredListProps, SortField } from '../types';
+import { CountryTableBody } from './CountryTableBody';
 
-interface FilteredListProps {
-  title?: string;
-  items: CountryItem[];
-  categories: string[];
-}
+export function FilteredList({
+  title = 'Дані з World Bank API',
+  items,
+  sortField,
+  sortOrder,
+  onSort,
+}: FilteredListProps) {
+  const renderSortIndicator = (field: SortField) => {
+    if (sortField !== field) {
+      return <span className="sort-icon neutral"> ↕</span>;
+    }
+    return <span className="sort-icon active">{sortOrder === 'asc' ? ' ▲' : ' ▼'}</span>;
+  };
 
-
-
-export function FilteredList({title = 'Показники країн за регіонами',items,categories,}: FilteredListProps) 
-{const [selectedCategory, setSelectedCategory] = useState<string>(categories[0] ?? 'Усі регіони');
-
-  const filteredItems = selectedCategory === 'Усі регіони'? items : items.filter((country) => country.region === selectedCategory);
-        
-  return (  
+  return (
     <div className="card filter-section">
       <div className="filter-header">
         <h3 className="widget-title">{title}</h3>
-        <div className="filter-controls">
-          <label htmlFor="region-select">Регіон: </label>
-          <select
-            id="region-select"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
+        <span className="table-meta">Всього записів: {items.length}</span>
       </div>
 
       <div className="table-wrapper">
         <table className="data-table">
           <thead>
             <tr>
-              <th>Країна</th>
-              <th>Регіон</th>
-              <th>ВВП</th>
-              <th>Безробіття</th>
-              <th>Тривалість життя</th>
+              <th className="sortable-th" onClick={() => onSort('countryName')}>
+                Країна / Регіон {renderSortIndicator('countryName')}
+              </th>
+              <th className="sortable-th" onClick={() => onSort('countryCode')}>
+                Код {renderSortIndicator('countryCode')}
+              </th>
+              <th>Показник</th>
+              <th>Рік</th>
+              <th className="sortable-th" onClick={() => onSort('value')}>
+                ВВП (USD) {renderSortIndicator('value')}
+              </th>
             </tr>
           </thead>
-          <tbody>
-            {filteredItems.length > 0 ? (
-              filteredItems.map((country) => (
-                <tr key={country.id}>
-                  <td>{country.name}</td>
-                  <td>{country.region}</td>
-                  <td>{country.gdp}</td>
-                  <td>{country.unemployment}</td>
-                  <td>{country.lifeExpectancy}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={5} className="no-data">
-                  Немає даних для обраного регіону
-                </td>
-              </tr>
-            )}
-          </tbody>
+          <CountryTableBody items={items} />
         </table>
       </div>
     </div>

@@ -10,3 +10,5 @@ export function formatGdp(value: number): string {
   }
   return `$${value.toLocaleString('uk-UA')}`;
 }
+
+

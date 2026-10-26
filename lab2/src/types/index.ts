@@ -1,13 +1,41 @@
 export interface KpiItem {
-  id: string;
+  id: number;
   title: string;
   value: string;
   change?: string;
   isPositive?: boolean;
 }
 
+export interface ToggleProps {
+  label?: string;
+}
+
+export interface CounterProps {
+  label?: string;
+  initialValue?: number;
+  step?: number;
+  min?: number;
+  max?: number;
+}
+
+export interface KpiCardProps {
+  title: string;
+  value: string;
+  change?: string;
+  isPositive?: boolean;
+}
+
+export interface CountryItem {
+  id: number;
+  name: string;
+  region: string;
+  gdp: string;
+  unemployment: string;
+  lifeExpectancy: string;
+}
+
 export interface EconomicIndicatorItem {
-  id: string;
+  id: number;
   countryName: string;
   countryCode: string;
   indicatorName: string;
@@ -32,12 +60,14 @@ export interface WorldBankRecord {
 export type SortField = 'countryName' | 'countryCode' | 'value';
 export type SortOrder = 'asc' | 'desc';
 
-// Збережено для зворотної сумісності з типами ЛР1
-export interface CountryItem {
-  id: string;
-  name: string;
-  region: string;
-  gdp: string;
-  unemployment: string;
-  lifeExpectancy: string;
+export interface FilteredListProps {
+  title?: string;
+  items: EconomicIndicatorItem[];
+  sortField: SortField;
+  sortOrder: SortOrder;
+  onSort: (field: SortField) => void;
+}
+
+export interface CountryTableBodyProps {
+  items: EconomicIndicatorItem[];
 }

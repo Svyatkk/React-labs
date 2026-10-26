@@ -1,9 +1,4 @@
-interface KpiCardProps {
-  title: string;
-  value: string;
-  change?: string;
-  isPositive?: boolean;
-}
+import type { KpiCardProps } from '../types';
 
 export function KpiCard({ title, value, change, isPositive = true }: KpiCardProps) {
   return (
